@@ -97,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen>
     try {
       final authProvider = Provider.of<AuthProvider>(context, listen: false);
       // Wait for animations and token loading
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 6));
       if (mounted) {
         debugPrint(
           'SplashScreen: isLoggedIn=${authProvider.isLoggedIn}, token=${authProvider.token?.substring(0, 10)}..., error=${authProvider.errorMessage}',

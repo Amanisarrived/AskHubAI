@@ -13,6 +13,7 @@ class _SideDrawerState extends State<SideDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
@@ -49,7 +50,8 @@ class _SideDrawerState extends State<SideDrawer> {
             title: Text("Dark Mode"),
             trailing: Transform.scale(
               scale: 0.8,
-              child: Switch(inactiveThumbColor: Colors.white,
+              child: Switch(
+                inactiveThumbColor: Colors.white,
 
                 activeTrackColor: Color(0xFFFF6B6B),
                 activeColor: Colors.white,
@@ -64,7 +66,8 @@ class _SideDrawerState extends State<SideDrawer> {
           ),
           ListTile(
             onTap: () {
-              showDialog(barrierDismissible: false,
+              showDialog(
+                barrierDismissible: false,
                 context: context,
                 builder: (_) {
                   return AlertDialog(

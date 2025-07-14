@@ -1,4 +1,5 @@
 import 'package:ashub_chatai/repo/provider/chat_provider.dart';
+import 'package:ashub_chatai/widgets/mainscreenwidget/alert_box.dart';
 import 'package:ashub_chatai/widgets/mainscreenwidget/side_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,7 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () => chatProvider.clearMessages(),
+                    onPressed: () {
+                      showDialog(context: context, builder: (_) => AlertBox());
+                    },
                     icon: Icon(Iconsax.trash, size: 24.sp),
                     tooltip: 'Clear Chat',
                   ),
@@ -87,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: chatProvider.messages.isEmpty
                     ? 1
                     : chatProvider.messages.length +
-                    (chatProvider.isLoading ? 1 : 0),
+                          (chatProvider.isLoading ? 1 : 0),
                 itemBuilder: (context, index) {
                   if (chatProvider.messages.isEmpty &&
                       index == 0 &&
@@ -96,12 +99,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: EdgeInsets.symmetric(vertical: 10.h),
                       child: Column(
                         children: [
-                          Text("Hey there 👋", style: TextStyle(fontSize: 20.sp)),
+                          Text(
+                            "Hey there 👋",
+                            style: TextStyle(fontSize: 20.sp),
+                          ),
                           SizedBox(height: 5.h),
                           Text(
                             "I'm your AI buddy – ready to chat, answer, and assist!",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 14.sp, color: Colors.black87),
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.black87,
+                            ),
                           ),
                         ],
                       ),
@@ -118,7 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.only(right: 8.w, top: 2.h),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.asset("assets/images/logo.png", width: 30.w),
+                              child: Image.asset(
+                                "assets/images/logo.png",
+                                width: 30.w,
+                              ),
                             ),
                           ),
                           Flexible(
@@ -146,8 +158,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   final isUser = message.role == 'user';
 
                   return Align(
-                    alignment:
-                    isUser ? Alignment.centerRight : Alignment.centerLeft,
+                    alignment: isUser
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: isUser
@@ -159,7 +172,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsets.only(right: 8.w, top: 8.h),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.asset("assets/images/logo.png", width: 30.w),
+                              child: Image.asset(
+                                "assets/images/logo.png",
+                                width: 30.w,
+                              ),
                             ),
                           ),
 
@@ -176,12 +192,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: isUser
                                 ? Text(
-                              message.content,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                              ),
-                            )
+                                    message.content,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
+                                    ),
+                                  )
                                 : BotMessage(data: message.content),
                           ),
                         ),
