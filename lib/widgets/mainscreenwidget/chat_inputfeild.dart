@@ -18,7 +18,7 @@ class ChatInputfeild extends StatelessWidget {
       children: [
         Expanded(
           child: TextField(
-            textCapitalization: TextCapitalization.values[0],
+            textCapitalization: TextCapitalization.sentences,
             controller: controller,
             textInputAction: TextInputAction.send,
             decoration: InputDecoration(
