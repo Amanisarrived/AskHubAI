@@ -23,6 +23,7 @@ class AlertBox extends StatelessWidget {
         TextButton(
           onPressed: () {
             chatProvider.clearMessages();
+            Navigator.pop(context);
           },
           child: Text("Clear", style: TextStyle(color: Color(0xFFFF6B6B))),
         ),
