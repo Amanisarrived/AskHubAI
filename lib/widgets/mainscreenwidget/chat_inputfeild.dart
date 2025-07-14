@@ -43,7 +43,10 @@ class ChatInputfeild extends StatelessWidget {
         ),
         SizedBox(width: 8.w),
         GestureDetector(
-          onTap: onSend,
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            onSend();
+          },
           child: Container(
             padding: EdgeInsets.all(12.w),
             decoration: BoxDecoration(
