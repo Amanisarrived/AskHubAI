@@ -1,5 +1,9 @@
+import 'package:ashub_chatai/views/authpageview/login.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+
+import '../../repo/provider/auth_provider.dart';
 
 class SideDrawer extends StatefulWidget {
   const SideDrawer({super.key});
@@ -12,6 +16,7 @@ class _SideDrawerState extends State<SideDrawer> {
   bool _isDarkmode = false;
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Drawer(
       backgroundColor: Colors.white,
       child: ListView(
@@ -89,7 +94,13 @@ class _SideDrawerState extends State<SideDrawer> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          authProvider.logout();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => Login()),
+                          );
+                        },
                         child: Text(
                           "Yes",
                           style: TextStyle(color: Color(0xFFFF6B6B)),
