@@ -62,6 +62,7 @@ class _LoginState extends State<Login> {
   }
 
   void _handleSocialLogin(String provider) {
+    //will be used later
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('$provider login not implemented yet')),
     );

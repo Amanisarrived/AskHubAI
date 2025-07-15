@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application
-        android:label="ashub_chatai"
+   <uses-permission android:name="android.permission.INTERNET"/>
+    <application 
+        android:label="AksHubAI"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

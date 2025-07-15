@@ -115,6 +115,11 @@ class _SideDrawerState extends State<SideDrawer> {
             title: Text("Log Out"),
             trailing: Icon(Iconsax.arrow_right),
           ),
+          ListTile(
+            title: Text("New chat"),
+            leading: Icon(Iconsax.message4),
+            trailing: Icon(Iconsax.arrow_right),
+          ),
         ],
       ),
     );
