@@ -1,6 +1,5 @@
 import 'package:ashub_chatai/repo/provider/auth_provider.dart';
 import 'package:ashub_chatai/views/authpageview/accountcreatedpage.dart';
-import 'package:ashub_chatai/views/authpageview/login.dart';
 import 'package:ashub_chatai/views/authpageview/signin.dart';
 import 'package:ashub_chatai/views/authpageview/verification_feild.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +37,12 @@ class _VerificationcodeState extends State<Verificationcode> {
   }
 
   String _getOtpCode() {
-    return _otp1.text + _otp2.text + _otp3.text + _otp4.text + _otp5.text + _otp6.text;
+    return _otp1.text +
+        _otp2.text +
+        _otp3.text +
+        _otp4.text +
+        _otp5.text +
+        _otp6.text;
   }
 
   Future<void> _verifyOtp() async {
@@ -60,9 +64,13 @@ class _VerificationcodeState extends State<Verificationcode> {
         MaterialPageRoute(builder: (_) => const Accountcreatedpage()),
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(authProvider.errorMessage ?? 'Verification failed')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(authProvider.errorMessage ?? 'Verification failed'),
+          ),
+        );
+      }
     }
   }
 
@@ -121,34 +129,34 @@ class _VerificationcodeState extends State<Verificationcode> {
                     child: Column(
                       children: [
                         Text(
-                          "Enter Verification Code",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25.sp,
-                          ),
-                        )
+                              "Enter Verification Code",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25.sp,
+                              ),
+                            )
                             .animate()
                             .scale(
-                          begin: const Offset(0.5, 0.5),
-                          duration: 500.ms,
-                          curve: Curves.easeOut,
-                        )
+                              begin: const Offset(0.5, 0.5),
+                              duration: 500.ms,
+                              curve: Curves.easeOut,
+                            )
                             .fadeIn(duration: 500.ms),
                         Text(
-                          textAlign: TextAlign.center,
-                          "We've sent an OTP code to ${widget.email}\n(It may take a few seconds to arrive)",
-                          style: TextStyle(
-                            color: const Color(0xFF666666),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 16.sp,
-                          ),
-                        )
+                              textAlign: TextAlign.center,
+                              "We've sent an OTP code to ${widget.email}\n(It may take a few seconds to arrive)",
+                              style: TextStyle(
+                                color: const Color(0xFF666666),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.sp,
+                              ),
+                            )
                             .animate()
                             .scale(
-                          begin: const Offset(0.5, 0.5),
-                          duration: 500.ms,
-                          curve: Curves.easeOut,
-                        )
+                              begin: const Offset(0.5, 0.5),
+                              duration: 500.ms,
+                              curve: Curves.easeOut,
+                            )
                             .fadeIn(duration: 500.ms),
                         SizedBox(height: 40.h),
                         Row(
@@ -177,7 +185,9 @@ class _VerificationcodeState extends State<Verificationcode> {
                         SizedBox(height: 20.h),
                         AuthBtn(
                           textcolor: Colors.white,
-                          btntext: authProvider.isLoading ? 'Verifying...' : 'Verify',
+                          btntext: authProvider.isLoading
+                              ? 'Verifying...'
+                              : 'Verify',
                           backgroundcolor: const Color(0xFFFF6B6B),
                           onPressed: authProvider.isLoading ? null : _verifyOtp,
                         ),
