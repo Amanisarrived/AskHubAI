@@ -1,5 +1,4 @@
 import 'package:ashub_chatai/views/authpageview/login.dart';
-import 'package:ashub_chatai/views/mainscreens/home_screen.dart';
 import 'package:ashub_chatai/widgets/custombtn/authbtn/authbtn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
