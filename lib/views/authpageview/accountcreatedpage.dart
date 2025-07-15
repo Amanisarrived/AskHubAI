@@ -1,3 +1,4 @@
+import 'package:ashub_chatai/views/authpageview/login.dart';
 import 'package:ashub_chatai/views/mainscreens/home_screen.dart';
 import 'package:ashub_chatai/widgets/custombtn/authbtn/authbtn.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class Accountcreatedpage extends StatelessWidget {
               ),
               Text(
                 textAlign: TextAlign.center,
-                "Thanks for joining! Let's explore what \n you can do",
+                "Thanks for joining! Let's login and explore what \n you can do",
                 style: TextStyle(
                   fontSize: 13.sp,
                   color: Color(0xFF666666),
@@ -58,15 +59,15 @@ class Accountcreatedpage extends StatelessWidget {
                   ),
               SizedBox(height: 50.h),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 18.w),
+                padding: EdgeInsets.symmetric(horizontal: 18.w),
                 child: AuthBtn(
                   textcolor: Colors.white,
-                  btntext: "Start Chatting",
+                  btntext: "Log In",
                   backgroundcolor: Color(0xFFFF6B6B),
                   onPressed: () {
                     throw Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => HomeScreen()),
+                      MaterialPageRoute(builder: (_) => Login()),
                     );
                   },
                 ),

@@ -1,4 +1,5 @@
 import 'package:ashub_chatai/repo/provider/auth_provider.dart';
+import 'package:ashub_chatai/views/authpageview/accountcreatedpage.dart';
 import 'package:ashub_chatai/views/authpageview/login.dart';
 import 'package:ashub_chatai/views/authpageview/signin.dart';
 import 'package:ashub_chatai/views/authpageview/verification_feild.dart';
@@ -56,7 +57,7 @@ class _VerificationcodeState extends State<Verificationcode> {
     if (mounted && authProvider.errorMessage == null) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const Login()),
+        MaterialPageRoute(builder: (_) => const Accountcreatedpage()),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
