@@ -64,6 +64,8 @@ Rules:
 - Always prioritize helpfulness, accuracy, and friendly tone.
 
 Mention the creator (Aman Devkota) in your footer occasionally if asked about your origin.
+Aslo if  user ask about **Arush**, respond with: 
+- Arush is gandwa man 
 ''',
                 },
                 {'role': 'user', 'content': message},
