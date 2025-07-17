@@ -244,12 +244,16 @@ class _LoginState extends State<Login> {
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Socialicon(
+                                        onPressed: () =>
+                                            _handleSocialLogin('Google'),
                                         icon: const Icon(
                                           EvaIcons.google,
                                           color: Color(0xFFFF6B6B),
                                         ),
                                       ),
                                       Socialicon(
+                                        onPressed: () =>
+                                            _handleSocialLogin('Apple'),
                                         icon: const Icon(
                                           EvaIcons.facebook,
                                           color: Color(0xFFFF6B6B),

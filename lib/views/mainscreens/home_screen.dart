@@ -22,6 +22,32 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    // Load the most recent conversation when the screen initializes
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final chatProvider = Provider.of<ChatProvider>(context, listen: false);
+      chatProvider
+          .loadSavedConversations()
+          .then((_) {
+            if (chatProvider.savedConversations.isNotEmpty) {
+              chatProvider.loadConversation(
+                chatProvider.savedConversations.first['conversationId'],
+              );
+            } else {
+              print('No conversations found on startup'); // Debug
+            }
+          })
+          .catchError((e) {
+            print('Failed to load conversations on startup: $e');
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('No previous conversations found')),
+            );
+          });
+    });
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     _scrollController.dispose();

@@ -44,7 +44,7 @@ class ChatService {
               'X-Title': 'AskHubAI',
             },
             body: jsonEncode({
-              'model': 'mistralai/devstral-small-2505:free',
+              'model': 'deepseek/deepseek-chat-v3-0324',
               'messages': [
                 {
                   'role': 'system',
@@ -63,9 +63,7 @@ Rules:
 - Do **not** try to describe or generate images.
 - Always prioritize helpfulness, accuracy, and friendly tone.
 
-Mention the creator (Aman Devkota) in your footer occasionally if asked about your origin.
-Aslo if  user ask about **Arush**, respond with: 
-- Arush is gandwa man 
+Mention the creator (Aman Devkota) in your footer only if asked about your origin.
 ''',
                 },
                 {'role': 'user', 'content': message},

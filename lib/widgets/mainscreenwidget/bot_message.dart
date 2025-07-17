@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:highlight/highlight.dart' show highlight, Node;
+import "package:flutter_screenutil/flutter_screenutil.dart";
 
 class BotMessage extends StatelessWidget {
   final String data;
@@ -18,12 +19,12 @@ class BotMessage extends StatelessWidget {
         data: data,
         selectable: true,
         styleSheet: MarkdownStyleSheet.fromTheme(theme).copyWith(
-          p: const TextStyle(fontSize: 16, color: Colors.black87),
-          h1: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          h2: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          code: const TextStyle(
+          p: TextStyle(fontSize: 16.sp, color: Colors.black87),
+          h1: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+          h2: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+          code: TextStyle(
             fontFamily: 'monospace',
-            fontSize: 14,
+            fontSize: 14.sp,
             color: Colors.white,
             backgroundColor: Colors.transparent,
           ),
@@ -45,11 +46,19 @@ class _CodeBuilder extends MarkdownElementBuilder {
   @override
   Widget? visitElementAfter(md.Element element, TextStyle? preferredStyle) {
     final rawText = element.textContent;
-    final lang = element.attributes['class']?.replaceFirst(RegExp(r'^language-'), '');
+    final lang = element.attributes['class']?.replaceFirst(
+      RegExp(r'^language-'),
+      '',
+    );
 
     final spans = (lang != null && lang.isNotEmpty)
         ? _highlightCode(rawText, lang)
-        : [TextSpan(text: rawText, style: const TextStyle(color: Colors.white))];
+        : [
+            TextSpan(
+              text: rawText,
+              style: const TextStyle(color: Colors.white),
+            ),
+          ];
 
     return Container(
       margin: const EdgeInsets.only(top: 12),
@@ -72,7 +81,7 @@ class _CodeBuilder extends MarkdownElementBuilder {
               children: [
                 Text(
                   lang ?? '',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Colors.white70,
@@ -96,10 +105,7 @@ class _CodeBuilder extends MarkdownElementBuilder {
             padding: const EdgeInsets.all(12),
             child: SelectableText.rich(
               TextSpan(children: spans),
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white,
-              ),
+              style: const TextStyle(fontSize: 14, color: Colors.white),
             ),
           ),
         ],
@@ -116,17 +122,15 @@ class _CodeBuilder extends MarkdownElementBuilder {
     if (node.value != null) {
       return TextSpan(
         text: node.value,
-        style: TextStyle(
-          color: _colorFor(node.className),
-        ),
+        style: TextStyle(color: _colorFor(node.className)),
       );
     }
 
     return TextSpan(
-      children: (node.children ?? []).map((child) => _convertNode(child)).toList(),
-      style: TextStyle(
-        color: _colorFor(node.className),
-      ),
+      children: (node.children ?? [])
+          .map((child) => _convertNode(child))
+          .toList(),
+      style: TextStyle(color: _colorFor(node.className)),
     );
   }
 

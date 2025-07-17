@@ -249,12 +249,14 @@ class _SigninState extends State<Signin> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Socialicon(
+                                  onPressed: () {},
                                   icon: const Icon(
                                     EvaIcons.google,
                                     color: Color(0xFFFF6B6B),
                                   ),
                                 ),
                                 Socialicon(
+                                  onPressed: () {},
                                   icon: const Icon(
                                     EvaIcons.facebook,
                                     color: Color(0xFFFF6B6B),
