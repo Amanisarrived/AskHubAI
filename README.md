@@ -1,16 +1,39 @@
-# ashub_chatai
+# 🤖 AskHub AI - Your Savage AI Companion
 
-A new Flutter project.
+AskHub AI is not your average chatbot — it's your **AI best friend who roasts you, vibes with you**, and doesn’t hold back.
 
-## Getting Started
+## 🚀 Features
 
-This project is a starting point for a Flutter application.
+- 🔐 User Authentication (Signup, Login, Email Verification)
+- 💬 Real-time AI Chat (funny, sarcastic, brutally honest)
+- 📦 Chat saving using MongoDB
+- ☁️ Backend hosted on Railway
+- 🧠 Custom AI logic via Groq API (GPT-like)
+- 📱 Flutter frontend with clean UI
+- 📈 Fully scalable architecture
 
-A few resources to get you started if this is your first Flutter project:
+## 🔜 Upcoming Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🌙 Dark Mode
+- 🖼️ Image Generation (AI based)
+- 👤 Profile Picture Upload
+- 🎉 More savage/fun modes
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 💻 Tech Stack
+
+| Layer       | Technology            |
+|-------------|------------------------|
+| Frontend    | Flutter                |
+| Backend     | Node.js + Express      |
+| Database    | MongoDB                |
+| Hosting     | Railway                |
+| AI Engine   | Meta             |
+
+
+## 📱 Installation (Flutter)
+
+```bash
+git clone https://github.com/yourusername/askhub-ai.git
+cd askhub-ai
+flutter pub get
+flutter run
