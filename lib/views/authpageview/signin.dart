@@ -1,11 +1,13 @@
 import 'package:ashub_chatai/repo/provider/auth_provider.dart';
 import 'package:ashub_chatai/views/authpageview/verificationcode.dart';
 import 'package:ashub_chatai/views/authpageview/login.dart';
+import 'package:ashub_chatai/widgets/authwidget/alert_box.dart';
 import 'package:ashub_chatai/widgets/authwidget/socialicon.dart';
 import 'package:ashub_chatai/widgets/custombtn/authbtn/authbtn.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/authwidget/inputfeild.dart';
@@ -164,43 +166,63 @@ class _SigninState extends State<Signin> {
                             SizedBox(height: 20.h),
 
                             // Error Message
+                            if (authprovider.errorMessage != null)
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: Text(
+                                  authprovider.errorMessage!,
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 14.sp,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+
+                            // Loading Indicator
+                            if (authprovider.isLoading)
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                child: SpinKitWave(
+                                  size: 40.sp,
+                                  color: const Color(0xFFFF6B6B),
+                                ),
+                              ),
 
                             /// Create Account Button
                             AuthBtn(
                               textcolor: Colors.white,
                               btntext: "Create Account",
                               backgroundcolor: const Color(0xFFFF6B6B),
-                              onPressed: () async {
-                                if (authprovider.isLoading) return;
-                                debugPrint("Button tapped");
-
-                                if (_formkey.currentState!.validate()) {
-                                  debugPrint("Form validate");
-                                  await authprovider.signUp(
-                                    _nameController.text.trim(),
-                                    _emailController.text.trim(),
-                                    _passwordController.text.trim(),
-                                  );
-                                  if (authprovider.isSignedUp) {
-                                    debugPrint("Signup");
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          'Verification code sent to your email',
-                                        ),
-                                      ),
-                                    );
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => Verificationcode(
-                                          email: _emailController.text.trim(),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                }
-                              },
+                              onPressed: authprovider.isLoading
+                                  ? null
+                                  : () async {
+                                      debugPrint("Button Tapped");
+                                      if (_formkey.currentState!.validate()) {
+                                        debugPrint("Form is valid");
+                                        await authprovider.signUp(
+                                          _nameController.text.trim(),
+                                          _emailController.text.trim(),
+                                          _passwordController.text.trim(),
+                                        );
+                                        if (authprovider.isSignedUp) {
+                                          debugPrint("Sign-up successful");
+                                          showDialog(
+                                            context: context,
+                                            builder: (_) => AlertBox(),
+                                          );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) => Verificationcode(
+                                                email: _emailController.text
+                                                    .trim(),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    },
                             ),
 
                             /// Already have account

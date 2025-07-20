@@ -1,8 +1,12 @@
 import 'package:ashub_chatai/repo/provider/auth_provider.dart';
 import 'package:ashub_chatai/views/mainscreens/home_screen.dart';
 import 'package:ashub_chatai/views/onbordingview/onbordingscreen.dart';
+import 'package:ashub_chatai/widgets/splashscreenwidget/logo_animation.dart';
+import 'package:ashub_chatai/widgets/splashscreenwidget/star_animation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -140,172 +144,33 @@ class _SplashScreenState extends State<SplashScreen>
       backgroundColor: const Color(0xFFF8F8F8),
       body: Stack(
         children: [
-          AnimatedBuilder(
-            animation: _star1Animation,
-            builder: (context, child) {
-              return Positioned(
-                top: 120.h,
-                left: 60.w,
-                child: Transform.scale(
-                  scale: 0.8 + (_star1Animation.value * 0.4),
-                  child: Opacity(
-                    opacity: (0.6 + (_star1Animation.value * 0.4)).clamp(
-                      0.0,
-                      1.0,
-                    ),
-                    child: const StarWidget(size: 24, color: Color(0xFFFF6B6B)),
-                  ),
-                ),
-              );
-            },
+          StarAnimation(
+            top: 120.w,
+            left: 60.h,
+            starOpacity: (0.6 + (_star1Animation.value * 0.4)).clamp(0.0, 1.0),
+            starSize: 0.8 + (_star1Animation.value * 0.4),
+            starAnimation: _star1Animation,
           ),
-          AnimatedBuilder(
-            animation: _star2Animation,
-            builder: (context, child) {
-              return Positioned(
-                bottom: 120.h,
-                right: 40.w,
-                child: Transform.scale(
-                  scale: 0.9 + (_star2Animation.value * 0.3),
-                  child: Opacity(
-                    opacity: (0.7 + (_star2Animation.value * 0.3)).clamp(
-                      0.0,
-                      1.0,
-                    ),
-                    child: const StarWidget(size: 20, color: Color(0xFFFF6B6B)),
-                  ),
-                ),
-              );
-            },
+
+          StarAnimation(
+            bottom: 120.h,
+            right: 40.w,
+            starOpacity: (0.7 + (_star2Animation.value * 0.3)).clamp(0.0, 1.0),
+            starSize: 1.2 + (_star2Animation.value * 0.5),
+            starAnimation: _star2Animation,
           ),
-          AnimatedBuilder(
-            animation: _star3Animation,
-            builder: (context, child) {
-              return Positioned(
-                bottom: 200.h,
-                left: 30.w,
-                child: Transform.scale(
-                  scale: 0.7 + (_star3Animation.value * 0.5),
-                  child: Opacity(
-                    opacity: (0.5 + (_star3Animation.value * 0.5)).clamp(
-                      0.0,
-                      1.0,
-                    ),
-                    child: const StarWidget(size: 16, color: Color(0xFFFF6B6B)),
-                  ),
-                ),
-              );
-            },
+
+          StarAnimation(
+            bottom: 220.h,
+            left: 30.w,
+            starOpacity: (0.5 + (_star3Animation.value * 0.5)).clamp(0.0, 1.0),
+            starSize: 0.8 + (_star3Animation.value * 0.3),
+            starAnimation: _star3Animation,
           ),
-          Center(
-            child: AnimatedBuilder(
-              animation: _logoAnimation,
-              builder: (context, child) {
-                return Transform.scale(
-                  scale: _logoAnimation.value,
-                  child: Opacity(
-                    opacity: _logoAnimation.value.clamp(0.0, 1.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 60.w,
-                          height: 60.h,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFFF6B6B),
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12.r),
-                            child: Image.asset("assets/images/logo.png"),
-                          ),
-                        ),
-                        SizedBox(height: 12.h),
-                        Text(
-                          'AskHubAI',
-                          style: TextStyle(
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFFFF6B6B),
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+
+          LogoAnimation(logoAnimation: _logoAnimation),
         ],
       ),
     );
   }
-}
-
-class StarWidget extends StatelessWidget {
-  final double size;
-  final Color color;
-
-  const StarWidget({Key? key, required this.size, required this.color})
-    : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      size: Size(size, size),
-      painter: StarPainter(color: color),
-    );
-  }
-}
-
-class StarPainter extends CustomPainter {
-  final Color color;
-
-  StarPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final path = Path();
-
-    final double centerX = size.width / 2;
-    final double centerY = size.height / 2;
-    final double radius = size.width / 2;
-
-    path.moveTo(centerX, centerY - radius);
-    path.quadraticBezierTo(
-      centerX + radius * 0.3,
-      centerY - radius * 0.3,
-      centerX + radius,
-      centerY,
-    );
-    path.quadraticBezierTo(
-      centerX + radius * 0.3,
-      centerY + radius * 0.3,
-      centerX,
-      centerY + radius,
-    );
-    path.quadraticBezierTo(
-      centerX - radius * 0.3,
-      centerY + radius * 0.3,
-      centerX - radius,
-      centerY,
-    );
-    path.quadraticBezierTo(
-      centerX - radius * 0.3,
-      centerY - radius * 0.3,
-      centerX,
-      centerY - radius,
-    );
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

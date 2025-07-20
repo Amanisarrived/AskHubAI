@@ -72,6 +72,9 @@ class AuthProvider with ChangeNotifier {
       _isLoading = false;
       if (result['success'] == true) {
         _isSignedUp = true;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString("user_email", email);
+        await prefs.setString("user_name", name);
       } else {
         _errorMessage = result['message']?.toString() ?? 'Sign-up failed';
         _pendingEmail = null;

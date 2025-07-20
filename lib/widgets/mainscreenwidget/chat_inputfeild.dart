@@ -18,6 +18,7 @@ class ChatInputfeild extends StatelessWidget {
       children: [
         Expanded(
           child: TextField(
+            maxLength: 1600,
             textCapitalization: TextCapitalization.sentences,
             controller: controller,
             textInputAction: TextInputAction.send,

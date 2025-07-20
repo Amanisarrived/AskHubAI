@@ -1,7 +1,9 @@
+import 'package:ashub_chatai/repo/provider/chat_provider.dart';
 import 'package:ashub_chatai/views/authpageview/login.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../repo/provider/auth_provider.dart';
 
@@ -13,6 +15,11 @@ class SideDrawer extends StatefulWidget {
 }
 
 class _SideDrawerState extends State<SideDrawer> {
+  Future<String> getUserName() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("user_name") ?? "User";
+  }
+
   bool _isDarkmode = false;
   @override
   Widget build(BuildContext context) {
@@ -35,9 +42,25 @@ class _SideDrawerState extends State<SideDrawer> {
                   ),
                 ),
                 SizedBox(width: 20),
-                Text(
-                  "Hi Aman 👋",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                FutureBuilder<String>(
+                  future: getUserName(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text("Error: ${snapshot.error}");
+                    } else {
+                      return Flexible(
+                        child: Text(
+                          "Hi ${snapshot.data} 👋",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -119,6 +142,14 @@ class _SideDrawerState extends State<SideDrawer> {
             title: Text("New chat"),
             leading: Icon(Iconsax.message4),
             trailing: Icon(Iconsax.arrow_right),
+            onTap: () {
+              final provider = Provider.of<ChatProvider>(
+                context,
+                listen: false,
+              );
+              provider.clearMessages();
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
