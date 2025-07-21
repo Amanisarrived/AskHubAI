@@ -36,7 +36,7 @@ class Inputfeild extends StatelessWidget {
         hintText: hinttxt,
         prefixIcon: icon,
         filled: true,
-        fillColor: Color(0xFFF8F8F8), // Light grey background
+        fillColor: Color(0xFFF9F9F9), // Light grey background
         // Default border (unfocused)
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

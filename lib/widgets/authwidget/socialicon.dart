@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 
 class Socialicon extends StatelessWidget {
   const Socialicon({required this.icon, required this.onPressed, super.key});
@@ -9,13 +11,12 @@ class Socialicon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(width: 2, color: Color(0xFFE0E0E0)),
+    return Expanded(
+      child: Column(
+        children: [
+          ListTile(leading: SignInButton(Buttons.Google, onPressed: onPressed)),
+        ],
       ),
-      padding: const EdgeInsets.all(4),
-      child: IconButton(icon: icon, iconSize: 25.r, onPressed: onPressed),
     );
   }
 }

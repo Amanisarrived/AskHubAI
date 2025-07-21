@@ -188,7 +188,10 @@ class _VerificationcodeState extends State<Verificationcode> {
                           btntext: authProvider.isLoading
                               ? 'Verifying...'
                               : 'Verify',
-                          backgroundcolor: const Color(0xFFFF6B6B),
+                          gradientColors: [
+                            Color(0xFFFF6B6B),
+                            Color(0xFFFF8E53),
+                          ],
                           onPressed: authProvider.isLoading ? null : _verifyOtp,
                         ),
                       ],

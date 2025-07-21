@@ -1,13 +1,13 @@
 import 'package:ashub_chatai/repo/provider/auth_provider.dart';
 import 'package:ashub_chatai/views/authpageview/signin.dart';
 import 'package:ashub_chatai/views/mainscreens/home_screen.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/authwidget/inputfeild.dart';
-import '../../widgets/authwidget/socialicon.dart';
 import '../../widgets/custombtn/authbtn/authbtn.dart';
 
 class Login extends StatefulWidget {
@@ -63,8 +63,12 @@ class _LoginState extends State<Login> {
 
   void _handleSocialLogin(String provider) {
     //will be used later
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$provider login not implemented yet')),
+      SnackBar(
+        duration: Duration(seconds: 1),
+        content: Text('$provider login not implemented yet'),
+      ),
     );
   }
 
@@ -87,7 +91,7 @@ class _LoginState extends State<Login> {
                     ),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                        vertical: screenHeight * 0.05.h,
+                        vertical: screenHeight * 0.01.h,
                         horizontal: screenWidth * 0.03.w,
                       ),
                       child: Form(
@@ -98,12 +102,28 @@ class _LoginState extends State<Login> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "AskHubAi",
-                                  style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xFFFF6B6B),
+                                ShaderMask(
+                                  shaderCallback: (bounds) =>
+                                      LinearGradient(
+                                        colors: [
+                                          Color(0xFFFF6B6B),
+                                          Color(0xFFFF8E53),
+                                        ], // Gradient colors
+                                      ).createShader(
+                                        Rect.fromLTWH(
+                                          0,
+                                          0,
+                                          bounds.width,
+                                          bounds.height,
+                                        ),
+                                      ),
+                                  blendMode: BlendMode.srcIn,
+                                  child: Text(
+                                    "AskHubAi",
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
                                 ),
                                 IconButton(
@@ -192,7 +212,10 @@ class _LoginState extends State<Login> {
                                     btntext: authProvider.isLoading
                                         ? 'Logging in...'
                                         : 'Log In',
-                                    backgroundcolor: const Color(0xFFFF6B6B),
+                                    gradientColors: [
+                                      Color(0xFFFF6B6B),
+                                      Color(0xFFFF8E53),
+                                    ],
                                     onPressed: authProvider.isLoading
                                         ? null
                                         : () => _handleLogin(authProvider),
@@ -238,28 +261,58 @@ class _LoginState extends State<Login> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 40.h),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Socialicon(
-                                        onPressed: () =>
-                                            _handleSocialLogin('Google'),
-                                        icon: const Icon(
-                                          EvaIcons.google,
-                                          color: Color(0xFFFF6B6B),
+                                  SizedBox(height: 20.h),
+                                  ListTile(
+                                    title: SignInButton(
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                          width: 2,
+                                          color: Color.fromARGB(
+                                            255,
+                                            255,
+                                            222,
+                                            222,
+                                          ),
+                                        ),
+                                        borderRadius: BorderRadiusGeometry.all(
+                                          Radius.circular(10),
                                         ),
                                       ),
-                                      Socialicon(
-                                        onPressed: () =>
-                                            _handleSocialLogin('Apple'),
-                                        icon: const Icon(
-                                          EvaIcons.facebook,
-                                          color: Color(0xFFFF6B6B),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 5.h,
+                                      ),
+
+                                      Buttons.Google,
+                                      onPressed: () {
+                                        _handleSocialLogin("Google");
+                                      },
+                                    ),
+                                  ),
+
+                                  ListTile(
+                                    title: SignInButton(
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                          width: 2,
+                                          color: Color.fromARGB(
+                                            255,
+                                            255,
+                                            222,
+                                            222,
+                                          ),
+                                        ),
+                                        borderRadius: BorderRadiusGeometry.all(
+                                          Radius.circular(10),
                                         ),
                                       ),
-                                    ],
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 10.h,
+                                      ),
+                                      Buttons.Apple,
+                                      onPressed: () {
+                                        _handleSocialLogin("Apple");
+                                      },
+                                    ),
                                   ),
                                 ],
                               ),

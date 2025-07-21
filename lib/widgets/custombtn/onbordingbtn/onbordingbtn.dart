@@ -3,31 +3,44 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Onbordingbtn extends StatelessWidget {
   const Onbordingbtn({
-    required this.textcolor,
     required this.btntext,
-    required this.backgroundcolor,
     required this.onPressed,
+    required this.gradientColors,
+    this.textcolor = Colors.white,
     super.key,
   });
+
   final String btntext;
-  final Color textcolor;
-  final Color backgroundcolor;
   final VoidCallback onPressed;
+  final List<Color> gradientColors;
+  final Color textcolor;
+
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundcolor,
-        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 50.w),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.r)),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: gradientColors),
+        borderRadius: BorderRadius.circular(20.r),
       ),
-      child: Text(
-        btntext,
-        style: TextStyle(
-          fontSize: 15.sp,
-          fontWeight: FontWeight.bold,
-          color: textcolor,
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(20.r),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20.r),
+          onTap: onPressed,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 50.w),
+            child: Center(
+              child: Text(
+                btntext,
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontWeight: FontWeight.bold,
+                  color: textcolor,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

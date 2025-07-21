@@ -32,13 +32,25 @@ class _SideDrawerState extends State<SideDrawer> {
           DrawerHeader(
             child: Row(
               children: [
-                CircleAvatar(
-                  backgroundColor: Color(0xFFFF6B6B),
-                  radius: 31,
+                Container(
+                  width: 62, // radius * 2
+                  height: 62,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFFFF6B6B), // Coral red
+                        Color(0xFFFF9F43), // Light orange
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    border: Border.all(color: Colors.white, width: 2),
+                  ),
                   child: CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 30,
-                    child: Image.asset("assets/images/onbording2.png"),
+                    backgroundColor:
+                        Colors.transparent, // transparent to show gradient
+                    child: Icon(Iconsax.user4, color: Colors.white),
                   ),
                 ),
                 SizedBox(width: 20),
@@ -73,25 +85,7 @@ class _SideDrawerState extends State<SideDrawer> {
               Navigator.pop(context);
             },
           ),
-          ListTile(
-            leading: Icon(Iconsax.mobile4),
-            title: Text("Dark Mode"),
-            trailing: Transform.scale(
-              scale: 0.8,
-              child: Switch(
-                inactiveThumbColor: Colors.white,
 
-                activeTrackColor: Color(0xFFFF6B6B),
-                activeColor: Colors.white,
-                value: _isDarkmode,
-                onChanged: (val) {
-                  setState(() {
-                    _isDarkmode = val;
-                  });
-                },
-              ),
-            ),
-          ),
           ListTile(
             onTap: () {
               showDialog(

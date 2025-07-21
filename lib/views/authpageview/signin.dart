@@ -7,6 +7,7 @@ import 'package:ashub_chatai/widgets/custombtn/authbtn/authbtn.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:heroicons/heroicons.dart';
 import 'package:provider/provider.dart';
@@ -69,14 +70,31 @@ class _SigninState extends State<Signin> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "AskHubAi",
-                                  style: TextStyle(
-                                    fontSize: 22.sp,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xFFFF6B6B),
+                                ShaderMask(
+                                  shaderCallback: (bounds) =>
+                                      LinearGradient(
+                                        colors: [
+                                          Color(0xFFFF6B6B),
+                                          Color(0xFFFF8E53),
+                                        ], // Gradient colors
+                                      ).createShader(
+                                        Rect.fromLTWH(
+                                          0,
+                                          0,
+                                          bounds.width,
+                                          bounds.height,
+                                        ),
+                                      ),
+                                  blendMode: BlendMode.srcIn,
+                                  child: Text(
+                                    "AskHubAi",
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
                                 ),
+
                                 IconButton(
                                   onPressed: () {},
                                   icon: const Icon(Icons.info_outline),
@@ -193,7 +211,10 @@ class _SigninState extends State<Signin> {
                             AuthBtn(
                               textcolor: Colors.white,
                               btntext: "Create Account",
-                              backgroundcolor: const Color(0xFFFF6B6B),
+                              gradientColors: [
+                                Color(0xFFFF6B6B),
+                                Color(0xFFFF8E53),
+                              ],
                               onPressed: authprovider.isLoading
                                   ? null
                                   : () async {
@@ -264,30 +285,43 @@ class _SigninState extends State<Signin> {
                               ],
                             ),
 
-                            SizedBox(height: 40.h),
+                            SizedBox(height: 20.h),
 
                             /// Social Icons
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Socialicon(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    EvaIcons.google,
-                                    color: Color(0xFFFF6B6B),
+                            ListTile(
+                              title: SignInButton(
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                    width: 2,
+                                    color: Color.fromARGB(255, 255, 222, 222),
+                                  ),
+                                  borderRadius: BorderRadiusGeometry.all(
+                                    Radius.circular(10),
                                   ),
                                 ),
-                                Socialicon(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    EvaIcons.facebook,
-                                    color: Color(0xFFFF6B6B),
-                                  ),
-                                ),
-                              ],
+                                padding: EdgeInsets.symmetric(vertical: 5.h),
+
+                                Buttons.Google,
+                                onPressed: () {},
+                              ),
                             ),
 
-                            SizedBox(height: 40.h),
+                            ListTile(
+                              title: SignInButton(
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                    width: 2,
+                                    color: Color.fromARGB(255, 255, 222, 222),
+                                  ),
+                                  borderRadius: BorderRadiusGeometry.all(
+                                    Radius.circular(10),
+                                  ),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 10.h),
+                                Buttons.Apple,
+                                onPressed: () {},
+                              ),
+                            ),
                           ],
                         ),
                       ),

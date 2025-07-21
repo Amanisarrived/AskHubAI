@@ -43,18 +43,25 @@ class ChatInputfeild extends StatelessWidget {
           ),
         ),
         SizedBox(width: 8.w),
-        GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-            onSend();
-          },
-          child: Container(
-            padding: EdgeInsets.all(12.w),
-            decoration: BoxDecoration(
-              color: Color(0xFFFF6B6B),
-              borderRadius: BorderRadius.circular(12.r),
+        Padding(
+          padding: EdgeInsets.only(bottom: 15.h),
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              onSend();
+            },
+            child: Container(
+              padding: EdgeInsets.all(12.w),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Icon(Iconsax.send_1, color: Colors.white),
             ),
-            child: Icon(Iconsax.send_1, color: Colors.white),
           ),
         ),
       ],

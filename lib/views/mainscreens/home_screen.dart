@@ -89,12 +89,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     },
                     icon: Icon(Iconsax.menu5, size: 24.sp),
                   ),
-                  Text(
-                    'AskHubAI',
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFFFF6B6B),
+                  ShaderMask(
+                    shaderCallback: (bounds) =>
+                        LinearGradient(
+                          colors: [
+                            Color(0xFFFF6B6B),
+                            Color(0xFFFF8E53),
+                          ], // Gradient colors
+                        ).createShader(
+                          Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                        ),
+                    blendMode: BlendMode.srcIn,
+                    child: Text(
+                      "AskHubAi",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                   IconButton(
@@ -154,7 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
-                                "assets/images/logo.png",
+                                "assets/images/glogo.png",
                                 width: 30.w,
                               ),
                             ),
@@ -199,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
-                                "assets/images/logo.png",
+                                "assets/images/glogo.png",
                                 width: 30.w,
                               ),
                             ),
@@ -211,9 +222,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             margin: EdgeInsets.symmetric(vertical: 8.h),
                             padding: EdgeInsets.all(12.w),
                             decoration: BoxDecoration(
+                              gradient: isUser
+                                  ? const LinearGradient(
+                                      colors: [
+                                        Color(0xFFFF6B6B), // Coral red
+                                        Color(
+                                          0xFFFF8E53,
+                                        ), // Light reddish orange
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    )
+                                  : null,
                               color: isUser
-                                  ? const Color(0xFFFF6B6B)
-                                  : Colors.grey[200],
+                                  ? null
+                                  : Colors.grey[200], // Use color if not user
                               borderRadius: BorderRadius.circular(12.r),
                             ),
                             child: isUser
@@ -231,10 +254,27 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (isUser)
                           Padding(
                             padding: EdgeInsets.only(left: 8.w, top: 8.h),
-                            child: Icon(
-                              Iconsax.user,
-                              size: 20.sp,
-                              color: const Color(0xFFFF6B6B),
+                            child: Container(
+                              width: 35.w,
+                              height: 35.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFFFF6B6B), // Coral red
+                                    Color(0xFFFF8E53), // Light coral/orange
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Iconsax.user,
+                                  size: 20.sp,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                       ],

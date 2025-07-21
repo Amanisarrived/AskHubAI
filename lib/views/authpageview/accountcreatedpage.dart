@@ -62,7 +62,7 @@ class Accountcreatedpage extends StatelessWidget {
                 child: AuthBtn(
                   textcolor: Colors.white,
                   btntext: "Log In",
-                  backgroundcolor: Color(0xFFFF6B6B),
+                  gradientColors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
                   onPressed: () {
                     throw Navigator.push(
                       context,

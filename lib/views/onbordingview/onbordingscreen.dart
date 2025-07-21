@@ -49,11 +49,7 @@ class _OnbordingscreenState extends State<Onbordingscreen> {
                 });
               },
               controller: _pageController,
-              children: const [
-                Onbording1(),
-                Onbording2(),
-                Onbording3(),
-              ],
+              children: const [Onbording1(), Onbording2(), Onbording3()],
             ),
 
             /// Dots Indicator
@@ -88,13 +84,13 @@ class _OnbordingscreenState extends State<Onbordingscreen> {
                         MaterialPageRoute(builder: (_) => const Signin()),
                       );
                     },
-                    backgroundcolor: const Color(0xFFFFF1F1),
-                    textcolor: const Color(0xFFFF6B6B),
+                    gradientColors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
+                    textcolor: const Color.fromARGB(255, 255, 255, 255),
                     btntext: 'Skip',
                   ),
                   Onbordingbtn(
                     onPressed: nextPage,
-                    backgroundcolor: const Color(0xFFFF6B6B),
+                    gradientColors: [Color(0xFFFF6B6B), Color(0xFFFF8E53)],
                     textcolor: Colors.white,
                     btntext: 'Next',
                   ),
